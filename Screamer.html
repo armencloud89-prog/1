@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>⚠ СИСТЕМНЫЙ СБОЙ ⚠</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #000;
+            color: #ff0000;
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            overflow: hidden;
+            cursor: none;
+        }
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        #mainScreen { display: block; }
+        .blink { animation: blink 0.3s infinite; }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .shake { animation: shake 0.5s infinite; }
+        @keyframes shake {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-10px, 10px) rotate(-1deg); }
+            75% { transform: translate(10px, -10px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        .glitch {
+            position: relative;
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #00ff00;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #0000ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 85px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(45px, 9999px, 47px, 0); }
+            95% { clip: rect(37px, 9999px, 20px, 0); }
+            100% { clip: rect(4px, 9999px, 91px, 0); }
+        }
+        .blood {
+            position: absolute;
+            background: radial-gradient(circle, #ff0000 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Основной экран -->
+    <div id="mainScreen" class="screen">
+        <div class="container shake" style="padding: 20px; text-align: center;">
+            <h1 class="glitch blink" data-text="🚨 ЦИФРОВОЙ ВИРУС АКТИВИРОВАН 🚨" style="font-size: 4em; margin: 50px 0;">
+                🚨 ЦИФРОВОЙ ВИРУС АКТИВИРОВАН 🚨
+            </h1>
+            
+            <div class="message blink" style="font-size: 2em; margin: 20px 0;">
+                ВАШЕ УСТРОЙСТВО ЗАРАЖЕНО CRIMCOK.EXE
+            </div>
+
+            <div id="countdown" style="font-size: 6em; color: #00ff00; margin: 30px 0;">
+                00:60
+            </div>
+
+            <div class="message" style="font-size: 1.5em; margin: 15px 0;">
+                До полного шифрования всех данных:
+            </div>
+
+            <div id="dynamicContent" style="font-size: 1.2em; line-height: 2; margin: 30px 0;">
+                <!-- Динамический контент будет здесь -->
+            </div>
+
+            <div style="position: fixed; bottom: 20px; width: 100%; text-align: center;">
+                <div class="blink" style="font-size: 1.2em;">
+                    ⚠ НЕ ВЫКЛЮЧАЙТЕ КОМПЬЮТЕР! ИДЕТ ПЕРЕДАЧА ДАННЫХ В МВД ⚠
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Экран с лицом -->
+    <div id="faceScreen" class="screen">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="glitch shake" data-text="👁 Я ВИЖУ ТЕБЯ 👁" style="font-size: 5em; color: #ff0000;">
+                👁 Я ВИЖУ ТЕБЯ 👁
+            </div>
+        </div>
+    </div>
+
+    <!-- Экран с полицией -->
+    <div id="policeScreen" class="screen">
+        <div style="background: #0000ff; color: #ffffff; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+            <div class="blink" style="font-size: 4em; margin: 20px;">
+                🚨 МВД РОССИИ 🚨
+            </div>
+            <div style="font-size: 2em; text-align: center;">
+                Ваше устройство заблокировано<br>
+                за просмотр запрещенного контента<br>
+                <br>
+                Ожидайте приезда наряда
+            </div>
+        </div>
+    </div>
+
+    <canvas id="matrix" class="matrix"></canvas>
+
+    <script>
+        // Матричный дождь
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = "01010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101";
+        const charArray = chars.split("");
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = "#0F0";
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35);
+
+        // Основная логика
+        const messages = [
+            "📍 Определение местоположения... КООРДИНАТЫ ПОЛУЧЕНЫ",
+            "📹 Доступ к веб-камере... АКТИВИРОВАН",
+            "🎤 Активация микрофона... ЗАПИСЬ НАЧАТА",
+            "💳 Сканирование банковских карт... 3 КАРТЫ ОБНАРУЖЕНО",
+            "🔐 Взлом паролей... 87% ВЫПОЛНЕНО",
+            "📸 Анализ личных фото... КОМПРОМАТ СОБРАН",
+            "📞 Перехват телефонных звонков... СИСТЕМА АКТИВНА",
+            "💻 Установка шпионского ПО... ВЫПОЛНЕНО",
+            "🚨 Уведомление в МВД... ОТПРАВЛЕНО",
+            "⚰️ Подготовка данных для черного рынка..."
+        ];
+
+        const screens = ['mainScreen', 'faceScreen', 'policeScreen'];
+        let currentScreen = 0;
+        let timeLeft = 60;
+        let bloodDrops = [];
+
+        function updateTimer() {
+            timeLeft--;
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('countdown').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                showScreen('policeScreen');
+                playSiren();
+            }
+        }
+
+        function updateContent() {
+            const content = document.getElementById('dynamicContent');
+            content.innerHTML = messages.map(msg => 
+                `<div class="blink" style="margin: 10px 0;">${msg}</div>`
+            ).join('');
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.style.display = 'none';
+            });
+            document.getElementById(screenId).style.display = 'block';
+        }
+
+        function createBloodDrop(x, y) {
+            const blood = document.createElement('div');
+            blood.className = 'blood';
+            blood.style.width = Math.random() * 100 + 50 + 'px';
+            blood.style.height = blood.style.width;
+            blood.style.left = x + 'px';
+            blood.style.top = y + 'px';
+            blood.style.opacity = '0.7';
+            document.body.appendChild(blood);
+            bloodDrops.push(blood);
+            
+            setTimeout(() => {
+                blood.remove();
+                bloodDrops = bloodDrops.filter(b => b !== blood);
+            }, 5000);
+        }
+
+        function playSiren() {
+            try {
+                const context = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = context.createOscillator();
+                const gainNode = context.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(context.destination);
+                
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(800, context.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(1600, context.currentTime + 0.5);
+                
+                gainNode.gain.setValueAtTime(0.3, context.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.7, context.currentTime + 0.5);
+                
+                oscillator.start();
+                setTimeout(() => oscillator.stop(), 1000);
+            } catch(e) {}
+        }
+
+        // Обработчики событий
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.98) {
+                createBloodDrop(e.clientX, e.clientY);
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            e.preventDefault();
+            if (e.key === 'Escape' || e.key === 'F12') {
+                showScreen('faceScreen');
+                setTimeout(() => showScreen('mainScreen'), 3000);
+            }
+        });
+
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            createBloodDrop(e.clientX, e.clientY);
+        });
+
+        // Запрет выхода
+        window.addEventListener('beforeunload', (e) => {
+            e.preventDefault();
+            e.returnValue = '';
+        });
+
+        // Запуск
+        setInterval(updateTimer, 1000);
+        setInterval(updateContent, 5000);
+        setInterval(() => {
+            currentScreen = (currentScreen + 1) % screens.length;
+            showScreen(screens[currentScreen]);
+        }, 8000);
+        setInterval(playSiren, 3000);
+
+        // Полноэкранный режим
+        document.documentElement.requestFullscreen().catch(err => {});
+
+        // Вибрация (если поддерживается)
+        if (navigator.vibrate) {
+            setInterval(() => navigator.vibrate([200, 100, 200]), 3000);
+        }
+
+        updateContent();
+    </script>
+</body>
+</html>
